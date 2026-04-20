@@ -3,24 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameVault | Mi Biblioteca Completa</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>GameVault | Mi Colección</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-body: #121212;
-            --bg-side: #181818;
-            --bg-item: #1e1e1e;
-            --bg-item-hover: #252525;
-            --accent: #f39c12; /* Naranja cálido */
-            --accent-glow: rgba(243, 156, 18, 0.2);
-            --text-p: #e0e0e0;
-            --text-s: #a0a0a0;
-            --steam: #1b2838;
-            --epic: #2a2a2a;
+            --bg-body: #0d0d0f;
+            --bg-side: #151518;
+            --bg-item: #1c1c21;
+            --bg-item-hover: #25252e;
+            --accent: #8b5cf6; /* Violeta principal */
+            --accent-light: #a78bfa;
+            --accent-glow: rgba(139, 92, 246, 0.3);
+            --text-p: #f8fafc;
+            --text-s: #94a3b8;
+            --steam-blue: #66c0f4;
+            --epic-white: #ffffff;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-body);
             color: var(--text-p);
             margin: 0;
@@ -29,29 +30,39 @@
             overflow: hidden;
         }
 
-        /* Sidebar de Filtros */
+        /* Sidebar */
         aside {
-            width: 260px;
+            width: 280px;
             background-color: var(--bg-side);
-            border-right: 1px solid #333;
+            border-right: 1px solid #2d2d35;
             display: flex;
             flex-direction: column;
-            padding: 20px;
+            padding: 25px;
             flex-shrink: 0;
         }
 
-        aside h2 {
-            font-size: 1.2rem;
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
             color: var(--accent);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3 {
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 25px;
+            color: var(--text-s);
+            letter-spacing: 1.5px;
+            margin: 20px 0 10px 0;
         }
 
         .filter-group {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 5px;
             overflow-y: auto;
         }
 
@@ -60,233 +71,247 @@
             border: none;
             color: var(--text-s);
             text-align: left;
-            padding: 10px 15px;
-            border-radius: 6px;
+            padding: 12px 15px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 0.9rem;
-            transition: all 0.2s;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .filter-btn:hover {
             background: var(--bg-item);
             color: white;
+            padding-left: 20px;
         }
 
         .filter-btn.active {
             background: var(--accent);
-            color: #000;
+            color: white;
             font-weight: 600;
+            box-shadow: 0 4px 15px var(--accent-glow);
         }
 
-        /* Contenedor Principal */
+        /* Main Content */
         main {
             flex-grow: 1;
-            padding: 30px 50px;
+            padding: 40px;
             overflow-y: auto;
-            background: linear-gradient(180deg, #141414 0%, #121212 100%);
         }
 
         header {
-            margin-bottom: 30px;
-        }
-
-        header h1 {
-            font-size: 2rem;
-            margin: 0;
-        }
-
-        header p {
-            color: var(--text-s);
-            margin-top: 5px;
-        }
-
-        /* Lista Vertical */
-        .game-list {
             display: flex;
-            flex-direction: column;
-            gap: 10px;
-            max-width: 1000px;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #2d2d35;
+            padding-bottom: 20px;
         }
+
+        .header-left h1 { margin: 0; font-size: 2.2rem; }
+        .header-left p { margin: 5px 0 0 0; color: var(--text-s); }
+
+        .stats-box {
+            background: var(--bg-item);
+            padding: 15px 25px;
+            border-radius: 12px;
+            border: 1px solid var(--accent);
+            text-align: right;
+        }
+
+        .stats-box label { display: block; font-size: 0.7rem; color: var(--text-s); text-transform: uppercase; }
+        .stats-box span { font-size: 1.5rem; font-weight: 800; color: var(--accent-light); }
+
+        /* Games List */
+        .game-list { display: flex; flex-direction: column; gap: 8px; }
 
         .game-row {
             background-color: var(--bg-item);
-            padding: 15px 25px;
-            border-radius: 8px;
+            padding: 18px 25px;
+            border-radius: 10px;
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr 100px;
+            grid-template-columns: 2fr 1.2fr 1fr 120px;
             align-items: center;
             transition: all 0.2s;
-            border-left: 3px solid transparent;
         }
 
         .game-row:hover {
             background-color: var(--bg-item-hover);
-            border-left-color: var(--accent);
-            transform: translateX(5px);
+            transform: scale(1.01);
         }
 
-        .name-col { font-weight: 600; font-size: 1rem; color: #fff; }
-        .platform-col { font-size: 0.8rem; color: var(--text-s); }
-        .category-col { font-size: 0.8rem; color: var(--accent); opacity: 0.8; }
-        .rating-col { font-size: 0.85rem; color: #66c0f4; }
-        .price-col { text-align: right; font-weight: 700; color: var(--accent); }
+        .name-col { font-weight: 600; display: flex; align-items: center; gap: 12px; }
+        .category-tag { font-size: 0.75rem; color: var(--accent-light); background: rgba(139, 92, 246, 0.1); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(139, 92, 246, 0.2); }
+        .platform-tag { font-size: 0.7rem; padding: 3px 8px; border-radius: 4px; font-weight: 700; text-transform: uppercase; }
+        .tag-steam { background: #1b2838; color: var(--steam-blue); }
+        .tag-epic { background: #2a2a2a; color: white; }
+        .price-col { text-align: right; font-weight: 800; font-size: 1.1rem; color: #fff; }
 
-        .badge {
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            margin-right: 10px;
-            background: #333;
-        }
-
-        /* Scrollbar Personalizado */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-body); }
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
-
-        @media (max-width: 900px) {
-            .game-row { grid-template-columns: 1fr 1fr; gap: 10px; }
-            .rating-col, .category-col { display: none; }
-            body { flex-direction: column; }
-            aside { width: 100%; height: auto; border-right: none; border-bottom: 1px solid #333; }
-            .filter-group { flex-direction: row; flex-wrap: wrap; }
-        }
     </style>
 </head>
 <body>
 
     <aside>
-        <h2>Filtros</h2>
+        <div class="logo"><span>👾</span> GameVault</div>
+        
+        <h3>Plataforma</h3>
         <div class="filter-group">
-            <button class="filter-btn active" onclick="filterBy('all', this)">Todos los Juegos</button>
-            <button class="filter-btn" onclick="filterBy('Multiplayer', this)">Multiplayer</button>
-            <button class="filter-btn" onclick="filterBy('Supervivencia', this)">Supervivencia</button>
-            <button class="filter-btn" onclick="filterBy('Terror', this)">Terror</button>
-            <button class="filter-btn" onclick="filterBy('FPS', this)">Acción / FPS</button>
-            <button class="filter-btn" onclick="filterBy('Aventura', this)">Aventura</button>
-            <button class="filter-btn" onclick="filterBy('Simulación', this)">Simulación</button>
-            <button class="filter-btn" onclick="filterBy('Puzzle', this)">Puzzle / Ingenio</button>
-            <button class="filter-btn" onclick="filterBy('RPG', this)">RPG</button>
-            <button class="filter-btn" onclick="filterBy('Estrategia', this)">Estrategia / Cartas</button>
+            <button class="filter-btn plat-filter active" onclick="filterPlatform('all', this)">Todas</button>
+            <button class="filter-btn plat-filter" onclick="filterPlatform('Steam', this)">Steam</button>
+            <button class="filter-btn plat-filter" onclick="filterPlatform('Epic', this)">Epic Games</button>
+        </div>
+
+        <h3>Categorías</h3>
+        <div class="filter-group">
+            <button class="filter-btn cat-filter active" onclick="filterCategory('all', this)">Todos los géneros</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('Multiplayer', this)">Multiplayer</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('Supervivencia', this)">Supervivencia</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('Terror', this)">Terror</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('FPS', this)">Acción / FPS</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('Aventura', this)">Aventura</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('Puzzle', this)">Puzzle / Ingenio</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('RPG', this)">RPG</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('Simulación', this)">Simulación</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('Estrategia', this)">Estrategia / Cartas</button>
         </div>
     </aside>
 
     <main>
         <header>
-            <h1>Gaming Vault</h1>
-            <p id="counter">Cargando biblioteca...</p>
+            <div class="header-left">
+                <h1>Mi Biblioteca</h1>
+                <p id="counter">Cargando colección...</p>
+            </div>
+            <div class="stats-box">
+                <label>Valor de esta selección</label>
+                <span id="total-price">USD 0.00</span>
+            </div>
         </header>
 
-        <div class="game-list" id="game-list-container">
-            </div>
+        <div class="game-list" id="list"></div>
     </main>
 
     <script>
         const games = [
-            // --- STEAM LIBRARY ---
-            { n: "A Way Out", p: "Steam", c: ["Aventura", "Co-op"], r: "Muy Positivas", pr: "$29.99" },
-            { n: "ARK: Survival Evolved", p: "Steam", c: ["Supervivencia", "Multiplayer"], r: "Muy Positivas", pr: "$14.99" },
-            { n: "ARK: Survival Of The Fittest", p: "Steam", c: ["Multiplayer", "Acción"], r: "Positivas", pr: "Free" },
-            { n: "Black Mesa", p: "Steam", c: ["FPS", "Sci-Fi"], r: "Extremadamente Positivas", pr: "$19.99" },
-            { n: "Brawlhalla", p: "Steam", c: ["Lucha", "Multiplayer"], r: "Muy Positivas", pr: "Free" },
-            { n: "Bread & Fred Demo", p: "Steam", c: ["Plataformas", "Co-op"], r: "Muy Positivas", pr: "Free" },
-            { n: "Bridge Constructor Portal", p: "Steam", c: ["Puzzle", "Simulación"], r: "Extremadamente Positivas", pr: "$9.99" },
-            { n: "Buckshot Roulette", p: "Steam", c: ["Terror", "Estrategia"], r: "Extremadamente Positivas", pr: "$2.99" },
-            { n: "Call of Duty", p: "Steam", c: ["FPS", "Multiplayer"], r: "Variadas", pr: "$19.99" },
-            { n: "Counter-Strike 2", p: "Steam", c: ["FPS", "Multiplayer"], r: "Muy Positivas", pr: "Free" },
-            { n: "Dead Age", p: "Steam", c: ["RPG", "Zombies", "Estrategia"], r: "Muy Positivas", pr: "$14.99" },
-            { n: "Dead Island Definitive Edition", p: "Steam", c: ["Zombies", "Acción"], r: "Muy Positivas", pr: "$19.99" },
-            { n: "DOOM", p: "Steam", c: ["FPS", "Acción"], r: "Extremadamente Positivas", pr: "$19.99" },
-            { n: "Escape Memoirs: Mini Stories", p: "Steam", c: ["Puzzle", "Terror"], r: "Muy Positivas", pr: "Free" },
-            { n: "Escape Memoirs: Questionable Side Stories", p: "Steam", c: ["Puzzle", "Aventura"], r: "Muy Positivas", pr: "Free" },
-            { n: "Escape Room - The Sick Colleague", p: "Steam", c: ["Puzzle", "Indie"], r: "Muy Positivas", pr: "$4.99" },
-            { n: "Gang Beasts", p: "Steam", c: ["Multiplayer", "Física"], r: "Muy Positivas", pr: "$19.99" },
-            { n: "Geometry Dash", p: "Steam", c: ["Plataformas", "Ritmo"], r: "Extremadamente Positivas", pr: "$4.99" },
-            { n: "Getting Over It with Bennett Foddy", p: "Steam", c: ["Física", "Difícil"], r: "Muy Positivas", pr: "$7.99" },
-            { n: "Golf It!", p: "Steam", c: ["Deportes", "Multiplayer"], r: "Muy Positivas", pr: "$8.99" },
-            { n: "Golf With Your Friends", p: "Steam", c: ["Deportes", "Multiplayer"], r: "Muy Positivas", pr: "$14.99" },
-            { n: "Governor of Poker 3", p: "Steam", c: ["Estrategia", "Cartas"], r: "Muy Positivas", pr: "Free" },
-            { n: "GTA V", p: "Steam", c: ["Mundo Abierto", "Acción"], r: "Muy Positivas", pr: "$29.99" },
-            { n: "Hacknet", p: "Steam", c: ["Simulación", "Hack"], r: "Extremadamente Positivas", pr: "$9.99" },
-            { n: "Internet Cafe Simulator 2", p: "Steam", c: ["Simulación", "Gestión"], r: "Variadas", pr: "$19.99" },
-            { n: "Left 4 Dead 2", p: "Steam", c: ["FPS", "Zombies", "Multiplayer"], r: "Extremadamente Positivas", pr: "$9.99" },
-            { n: "Lethal Company", p: "Steam", c: ["Terror", "Co-op"], r: "Extremadamente Positivas", pr: "$9.99" },
-            { n: "Metal Gear Rising: Revengeance", p: "Steam", c: ["Acción", "Hack & Slash"], r: "Extremadamente Positivas", pr: "$29.99" },
-            { n: "MONOPOLY Poker", p: "Steam", c: ["Estrategia", "Cartas"], r: "Variadas", pr: "Free" },
-            { n: "Once Human", p: "Steam", c: ["Supervivencia", "Mundo Abierto"], r: "Muy Positivas", pr: "Free" },
-            { n: "PAYDAY 2", p: "Steam", c: ["Acción", "Multiplayer"], r: "Muy Positivas", pr: "$9.99" },
-            { n: "Phasmophobia", p: "Steam", c: ["Terror", "Investigación"], r: "Extremadamente Positivas", pr: "$13.99" },
-            { n: "PICO PARK: Classic Edition", p: "Steam", c: ["Puzzle", "Multiplayer"], r: "Muy Positivas", pr: "$3.99" },
-            { n: "Poker Master", p: "Steam", c: ["Estrategia", "Cartas"], r: "Variadas", pr: "Free" },
-            { n: "Project Zomboid", p: "Steam", c: ["Supervivencia", "RPG"], r: "Extremadamente Positivas", pr: "$19.99" },
-            { n: "Raft", p: "Steam", c: ["Supervivencia", "Co-op"], r: "Muy Positivas", pr: "$19.99" },
-            { n: "Ranch Simulator", p: "Steam", c: ["Simulación", "Mundo Abierto"], r: "Muy Positivas", pr: "$24.99" },
-            { n: "Sherlock Holmes Chapter One", p: "Steam", c: ["Investigación", "Aventura"], r: "Muy Positivas", pr: "$44.99" },
-            { n: "Sherlock Holmes: Crimes and Punishments", p: "Steam", c: ["Investigación", "Aventura"], r: "Muy Positivas", pr: "$29.99" },
-            { n: "Stumble Guys", p: "Steam", c: ["Multiplayer", "Party"], r: "Muy Positivas", pr: "Free" },
-            { n: "Subnautica", p: "Steam", c: ["Supervivencia", "Aventura"], r: "Extremadamente Positivas", pr: "$29.99" },
-            { n: "The Forest", p: "Steam", c: ["Supervivencia", "Terror"], r: "Extremadamente Positivas", pr: "$19.99" },
-            { n: "Thief Simulator", p: "Steam", c: ["Simulación", "Acción"], r: "Muy Positivas", pr: "$19.99" },
-            { n: "Tres Reinos: El señor de la guerra", p: "Steam", c: ["Estrategia", "RPG"], r: "Variadas", pr: "Free" },
-            { n: "Unravel Two", p: "Steam", c: ["Aventura", "Puzzle"], r: "Muy Positivas", pr: "$19.99" },
-            { n: "The Witcher: Enhanced Edition", p: "Steam", c: ["RPG", "Fantasía"], r: "Muy Positivas", pr: "$9.99" },
-
-            // --- EPIC GAMES LIBRARY ---
-            { n: "Batman: Arkham Asylum", p: "Epic", c: ["Acción", "Aventura"], r: "Excelente", pr: "$19.99" },
-            { n: "Batman: Arkham City", p: "Epic", c: ["Acción", "Mundo Abierto"], r: "Excelente", pr: "$19.99" },
-            { n: "Batman: Arkham Knight", p: "Epic", c: ["Acción", "Aventura"], r: "Excelente", pr: "$19.99" },
-            { n: "BioShock Remastered", p: "Epic", c: ["FPS", "Terror"], r: "Excelente", pr: "$19.99" },
-            { n: "BioShock 2 Remastered", p: "Epic", c: ["FPS", "Acción"], r: "Excelente", pr: "$19.99" },
-            { n: "BioShock Infinite: Complete Edition", p: "Epic", c: ["FPS", "Historia"], r: "Excelente", pr: "$29.99" },
-            { n: "Borderlands 2", p: "Epic", c: ["FPS", "RPG"], r: "Excelente", pr: "$19.99" },
-            { n: "Borderlands: Pre-Sequel", p: "Epic", c: ["FPS", "RPG"], r: "Excelente", pr: "$39.99" },
-            { n: "Death Stranding", p: "Epic", c: ["Aventura", "Mundo Abierto"], r: "Excelente", pr: "$29.99" },
-            { n: "Fall Guys", p: "Epic", c: ["Multiplayer", "Party"], r: "Muy Positivas", pr: "Free" },
-            { n: "Ghostrunner", p: "Epic", c: ["Acción", "Cyberpunk"], r: "Excelente", pr: "$29.99" },
-            { n: "Rocket League", p: "Epic", c: ["Multiplayer", "Deportes"], r: "Muy Positivas", pr: "Free" },
-            { n: "Tomb Raider: GOTY", p: "Epic", c: ["Aventura", "Acción"], r: "Excelente", pr: "$19.99" },
-            { n: "Rise of the Tomb Raider", p: "Epic", c: ["Aventura", "Acción"], r: "Excelente", pr: "$29.99" },
-            { n: "Shadow of the Tomb Raider", p: "Epic", c: ["Aventura", "Acción"], r: "Excelente", pr: "$39.99" },
-            { n: "Wolfenstein: The New Order", p: "Epic", c: ["FPS", "Acción"], r: "Excelente", pr: "$19.99" }
+            // STEAM
+            { n: "A Way Out", p: "Steam", c: ["Aventura", "Co-op"], r: "Muy Positivas", pr: 29.99 },
+            { n: "ARK: Survival Evolved", p: "Steam", c: ["Supervivencia", "Multiplayer"], r: "Muy Positivas", pr: 14.99 },
+            { n: "ARK: Survival Of The Fittest", p: "Steam", c: ["Multiplayer", "Acción"], r: "Positivas", pr: 0 },
+            { n: "Black Mesa", p: "Steam", c: ["FPS", "Sci-Fi"], r: "Extremadamente Positivas", pr: 19.99 },
+            { n: "Brawlhalla", p: "Steam", c: ["Lucha", "Multiplayer"], r: "Muy Positivas", pr: 0 },
+            { n: "Bread & Fred Demo", p: "Steam", c: ["Plataformas", "Co-op"], r: "Muy Positivas", pr: 0 },
+            { n: "Bridge Constructor Portal", p: "Steam", c: ["Puzzle", "Simulación"], r: "Extremadamente Positivas", pr: 9.99 },
+            { n: "Buckshot Roulette", p: "Steam", c: ["Terror", "Estrategia"], r: "Extremadamente Positivas", pr: 2.99 },
+            { n: "Call of Duty", p: "Steam", c: ["FPS", "Multiplayer"], r: "Variadas", pr: 19.99 },
+            { n: "Counter-Strike 2", p: "Steam", c: ["FPS", "Multiplayer"], r: "Muy Positivas", pr: 0 },
+            { n: "Dead Age", p: "Steam", c: ["RPG", "Zombies", "Estrategia"], r: "Muy Positivas", pr: 14.99 },
+            { n: "Dead Island Definitive Edition", p: "Steam", c: ["Zombies", "Acción"], r: "Muy Positivas", pr: 19.99 },
+            { n: "DOOM", p: "Steam", c: ["FPS", "Acción"], r: "Extremadamente Positivas", pr: 19.99 },
+            { n: "Escape Memoirs: Mini Stories", p: "Steam", c: ["Puzzle", "Terror"], r: "Muy Positivas", pr: 0 },
+            { n: "Escape Memoirs: Questionable Side Stories", p: "Steam", c: ["Puzzle", "Aventura"], r: "Muy Positivas", pr: 0 },
+            { n: "Escape Room - The Sick Colleague", p: "Steam", c: ["Puzzle", "Indie"], r: "Muy Positivas", pr: 4.99 },
+            { n: "Gang Beasts", p: "Steam", c: ["Multiplayer"], r: "Muy Positivas", pr: 19.99 },
+            { n: "Geometry Dash", p: "Steam", c: ["Plataformas"], r: "Extremadamente Positivas", pr: 4.99 },
+            { n: "Getting Over It", p: "Steam", c: ["Difícil"], r: "Muy Positivas", pr: 7.99 },
+            { n: "Golf It!", p: "Steam", c: ["Deportes", "Multiplayer"], r: "Muy Positivas", pr: 8.99 },
+            { n: "Golf With Your Friends", p: "Steam", c: ["Deportes", "Multiplayer"], r: "Muy Positivas", pr: 14.99 },
+            { n: "Governor of Poker 3", p: "Steam", c: ["Estrategia", "Cartas"], r: "Muy Positivas", pr: 0 },
+            { n: "GTA V", p: "Steam", c: ["Mundo Abierto", "Acción"], r: "Muy Positivas", pr: 29.99 },
+            { n: "Hacknet", p: "Steam", c: ["Simulación"], r: "Extremadamente Positivas", pr: 9.99 },
+            { n: "Internet Cafe Simulator 2", p: "Steam", c: ["Simulación"], r: "Variadas", pr: 19.99 },
+            { n: "Left 4 Dead 2", p: "Steam", c: ["FPS", "Zombies", "Multiplayer"], r: "Extremadamente Positivas", pr: 9.99 },
+            { n: "Lethal Company", p: "Steam", c: ["Terror", "Co-op"], r: "Extremadamente Positivas", pr: 9.99 },
+            { n: "Metal Gear Rising", p: "Steam", c: ["Acción"], r: "Extremadamente Positivas", pr: 29.99 },
+            { n: "MONOPOLY Poker", p: "Steam", c: ["Estrategia", "Cartas"], r: "Variadas", pr: 0 },
+            { n: "Once Human", p: "Steam", c: ["Supervivencia"], r: "Muy Positivas", pr: 0 },
+            { n: "PAYDAY 2", p: "Steam", c: ["Acción", "Multiplayer"], r: "Muy Positivas", pr: 9.99 },
+            { n: "Phasmophobia", p: "Steam", c: ["Terror"], r: "Extremadamente Positivas", pr: 13.99 },
+            { n: "PICO PARK", p: "Steam", c: ["Puzzle", "Multiplayer"], r: "Muy Positivas", pr: 3.99 },
+            { n: "Poker Master", p: "Steam", c: ["Estrategia", "Cartas"], r: "Variadas", pr: 0 },
+            { n: "Project Zomboid", p: "Steam", c: ["Supervivencia", "RPG"], r: "Extremadamente Positivas", pr: 19.99 },
+            { n: "Raft", p: "Steam", c: ["Supervivencia", "Co-op"], r: "Muy Positivas", pr: 19.99 },
+            { n: "Ranch Simulator", p: "Steam", c: ["Simulación"], r: "Muy Positivas", pr: 24.99 },
+            { n: "Sherlock Holmes Chapter One", p: "Steam", c: ["Aventura"], r: "Muy Positivas", pr: 44.99 },
+            { n: "Sherlock Holmes: Crimes and Punishments", p: "Steam", c: ["Aventura"], r: "Muy Positivas", pr: 29.99 },
+            { n: "Stumble Guys", p: "Steam", c: ["Multiplayer"], r: "Muy Positivas", pr: 0 },
+            { n: "Subnautica", p: "Steam", c: ["Supervivencia"], r: "Extremadamente Positivas", pr: 29.99 },
+            { n: "The Forest", p: "Steam", c: ["Supervivencia", "Terror"], r: "Extremadamente Positivas", pr: 19.99 },
+            { n: "Thief Simulator", p: "Steam", c: ["Simulación"], r: "Muy Positivas", pr: 19.99 },
+            { n: "Unravel Two", p: "Steam", c: ["Aventura", "Puzzle"], r: "Muy Positivas", pr: 19.99 },
+            { n: "The Witcher", p: "Steam", c: ["RPG"], r: "Muy Positivas", pr: 9.99 },
+            
+            // EPIC
+            { n: "Batman: Arkham Asylum", p: "Epic", c: ["Acción", "Aventura"], r: "Excelente", pr: 19.99 },
+            { n: "Batman: Arkham City", p: "Epic", c: ["Acción", "Mundo Abierto"], r: "Excelente", pr: 19.99 },
+            { n: "Batman: Arkham Knight", p: "Epic", c: ["Acción", "Aventura"], r: "Excelente", pr: 19.99 },
+            { n: "BioShock Remastered", p: "Epic", c: ["FPS", "Terror"], r: "Excelente", pr: 19.99 },
+            { n: "BioShock 2 Remastered", p: "Epic", c: ["FPS"], r: "Excelente", pr: 19.99 },
+            { n: "BioShock Infinite", p: "Epic", c: ["FPS"], r: "Excelente", pr: 29.99 },
+            { n: "Borderlands 2", p: "Epic", c: ["FPS", "RPG"], r: "Excelente", pr: 19.99 },
+            { n: "Death Stranding", p: "Epic", c: ["Aventura"], r: "Excelente", pr: 29.99 },
+            { n: "Fall Guys", p: "Epic", c: ["Multiplayer"], r: "Muy Positivas", pr: 0 },
+            { n: "Ghostrunner", p: "Epic", c: ["Acción"], r: "Excelente", pr: 29.99 },
+            { n: "Rocket League", p: "Epic", c: ["Multiplayer"], r: "Muy Positivas", pr: 0 },
+            { n: "Tomb Raider: GOTY", p: "Epic", c: ["Aventura", "Acción"], r: "Excelente", pr: 19.99 },
+            { n: "Rise of the Tomb Raider", p: "Epic", c: ["Aventura", "Acción"], r: "Excelente", pr: 29.99 },
+            { n: "Shadow of the Tomb Raider", p: "Epic", c: ["Aventura", "Acción"], r: "Excelente", pr: 39.99 },
+            { n: "Wolfenstein: The New Order", p: "Epic", c: ["FPS", "Acción"], r: "Excelente", pr: 19.99 }
         ];
 
-        function renderGames(data) {
-            const container = document.getElementById('game-list-container');
+        let currentCat = 'all';
+        let currentPlat = 'all';
+
+        function updateList() {
+            const container = document.getElementById('list');
+            const totalDisplay = document.getElementById('total-price');
             const counter = document.getElementById('counter');
+            
+            const filtered = games.filter(g => {
+                const matchCat = currentCat === 'all' || g.c.includes(currentCat);
+                const matchPlat = currentPlat === 'all' || g.p === currentPlat;
+                return matchCat && matchPlat;
+            }).sort((a,b) => a.n.localeCompare(b.n));
+
+            let total = 0;
             container.innerHTML = '';
             
-            data.sort((a,b) => a.n.localeCompare(b.n)).forEach(game => {
+            filtered.forEach(g => {
+                total += g.pr;
                 const row = document.createElement('div');
                 row.className = 'game-row';
                 row.innerHTML = `
-                    <div class="name-col"><span class="badge">${game.p}</span>${game.n}</div>
-                    <div class="category-col">${game.c.join(', ')}</div>
-                    <div class="platform-col">Plataforma: ${game.p}</div>
-                    <div class="rating-col">★ ${game.r}</div>
-                    <div class="price-col">${game.pr}</div>
+                    <div class="name-col">
+                        <span class="platform-tag tag-${g.p.toLowerCase()}">${g.p}</span>
+                        ${g.n}
+                    </div>
+                    <div>${g.c.map(cat => `<span class="category-tag">${cat}</span>`).join(' ')}</div>
+                    <div style="color:var(--text-s); font-size:0.85rem">★ ${g.r}</div>
+                    <div class="price-col">${g.pr === 0 ? 'GRATIS' : 'USD ' + g.pr.toFixed(2)}</div>
                 `;
                 container.appendChild(row);
             });
-            counter.innerText = `${data.length} juegos encontrados en tu biblioteca`;
+
+            totalDisplay.innerText = `USD ${total.toFixed(2)}`;
+            counter.innerText = `${filtered.length} juegos mostrados`;
         }
 
-        function filterBy(cat, btn) {
-            // UI Update
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        function filterCategory(cat, btn) {
+            currentCat = cat;
+            document.querySelectorAll('.cat-filter').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-
-            // Logic
-            if(cat === 'all') {
-                renderGames(games);
-            } else {
-                const filtered = games.filter(g => g.c.includes(cat));
-                renderGames(filtered);
-            }
+            updateList();
         }
 
-        // Init
-        renderGames(games);
+        function filterPlatform(plat, btn) {
+            currentPlat = plat;
+            document.querySelectorAll('.plat-filter').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            updateList();
+        }
+
+        updateList();
     </script>
 </body>
 </html>
