@@ -30,7 +30,6 @@
             overflow: hidden;
         }
 
-        /* Sidebar */
         aside {
             width: 280px;
             background-color: var(--bg-side);
@@ -91,7 +90,6 @@
             box-shadow: 0 4px 15px var(--accent-glow);
         }
 
-        /* Main Content */
         main {
             flex-grow: 1;
             padding: 40px;
@@ -121,7 +119,6 @@
         .stats-box label { display: block; font-size: 0.7rem; color: var(--text-s); text-transform: uppercase; }
         .stats-box span { font-size: 1.5rem; font-weight: 800; color: var(--accent-light); }
 
-        /* Games List */
         .game-list { display: flex; flex-direction: column; gap: 8px; }
 
         .game-row {
@@ -166,15 +163,17 @@
         <h3>Categorías</h3>
         <div class="filter-group">
             <button class="filter-btn cat-filter active" onclick="filterCategory('all', this)">Todos los géneros</button>
-            <button class="filter-btn cat-filter" onclick="filterCategory('Acción', this)">Acción / FPS</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('Multiplayer', this)">Multiplayer</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('Supervivencia', this)">Supervivencia</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('Terror', this)">Terror</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('FPS', this)">Acción / FPS</button>
             <button class="filter-btn cat-filter" onclick="filterCategory('Aventura', this)">Aventura</button>
-            <button class="filter-btn cat-filter" onclick="filterCategory('Co-op', this)">Co-op / Multiplayer</button>
-            <button class="filter-btn cat-filter" onclick="filterCategory('Deportes', this)">Deportes</button>
-            <button class="filter-btn cat-filter" onclick="filterCategory('Estrategia', this)">Estrategia</button>
-            <button class="filter-btn cat-filter" onclick="filterCategory('Indie', this)">Indie / Puzzle</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('Puzzle', this)">Puzzle / Ingenio</button>
             <button class="filter-btn cat-filter" onclick="filterCategory('RPG', this)">RPG</button>
             <button class="filter-btn cat-filter" onclick="filterCategory('Simulación', this)">Simulación</button>
-            <button class="filter-btn cat-filter" onclick="filterCategory('Supervivencia', this)">Supervivencia / Terror</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('Estrategia', this)">Estrategia / Cartas</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('Deportes', this)">Deportes</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('Indie', this)">Indie</button>
         </div>
     </aside>
 
@@ -195,96 +194,96 @@
 
     <script>
         const games = [
-            // STEAM 
-            { n: "A Way Out", p: "Steam", c: ["Aventura", "Co-op"], r: "Muy Positivas", pr: 29.99 },
-            { n: "ARK: Survival Evolved", p: "Steam", c: ["Supervivencia", "Co-op"], r: "Muy Positivas", pr: 14.99 },
-            { n: "ARK: Survival Of The Fittest", p: "Steam", c: ["Acción", "Co-op"], r: "Positivas", pr: 0 },
-            { n: "Black Mesa", p: "Steam", c: ["Acción"], r: "Extremadamente Positivas", pr: 19.99 },
-            { n: "Brawlhalla", p: "Steam", c: ["Acción", "Co-op"], r: "Muy Positivas", pr: 0 },
-            { n: "Bread & Fred Demo", p: "Steam", c: ["Aventura", "Co-op"], r: "Muy Positivas", pr: 0 },
-            { n: "Bridge Constructor Portal", p: "Steam", c: ["Indie", "Simulación"], r: "Extremadamente Positivas", pr: 9.99 },
-            { n: "Buckshot Roulette", p: "Steam", c: ["Indie", "Estrategia"], r: "Extremadamente Positivas", pr: 2.99 },
-            { n: "Call of Duty®", p: "Steam", c: ["Acción", "Co-op"], r: "Variadas", pr: 0 },
-            { n: "Counter-Strike", p: "Steam", c: ["Acción", "Co-op"], r: "Extremadamente Positivas", pr: 9.99 },
-            { n: "Counter-Strike 2", p: "Steam", c: ["Acción", "Co-op"], r: "Muy Positivas", pr: 0 },
-            { n: "Counter-Strike: Condition Zero", p: "Steam", c: ["Acción"], r: "Muy Positivas", pr: 9.99 },
-            { n: "Counter-Strike: Condition Zero Deleted Scenes", p: "Steam", c: ["Acción"], r: "Muy Positivas", pr: 0 },
-            { n: "Dead Age", p: "Steam", c: ["RPG", "Estrategia"], r: "Muy Positivas", pr: 14.99 },
-            { n: "Dead Island Definitive Edition", p: "Steam", c: ["Supervivencia", "Acción"], r: "Muy Positivas", pr: 19.99 },
-            { n: "DOOM", p: "Steam", c: ["Acción"], r: "Extremadamente Positivas", pr: 19.99 },
-            { n: "Escape Memoirs: Mini Stories", p: "Steam", c: ["Indie", "Supervivencia"], r: "Muy Positivas", pr: 0 },
-            { n: "Escape Memoirs: Questionable Side Stories", p: "Steam", c: ["Indie", "Aventura"], r: "Muy Positivas", pr: 0 },
-            { n: "Escape Room - The Sick Colleague", p: "Steam", c: ["Indie"], r: "Muy Positivas", pr: 4.99 },
-            { n: "Gang Beasts", p: "Steam", c: ["Co-op", "Acción"], r: "Muy Positivas", pr: 19.99 },
+            // STEAM (Región LATAM-USD)
+            { n: "A Way Out", p: "Steam", c: ["Aventura", "Multiplayer"], r: "Muy Positivas", pr: 29.99 },
+            { n: "ARK: Survival Evolved", p: "Steam", c: ["Supervivencia", "Multiplayer"], r: "Muy Positivas", pr: 14.99 },
+            { n: "ARK: Survival Of The Fittest", p: "Steam", c: ["Multiplayer", "FPS"], r: "Positivas", pr: 0 },
+            { n: "Black Mesa", p: "Steam", c: ["FPS", "Acción"], r: "Extremadamente Positivas", pr: 10.49 },
+            { n: "Brawlhalla", p: "Steam", c: ["Multiplayer", "Indie"], r: "Muy Positivas", pr: 0 },
+            { n: "Bread & Fred Demo", p: "Steam", c: ["Aventura", "Indie"], r: "Muy Positivas", pr: 0 },
+            { n: "Bridge Constructor Portal", p: "Steam", c: ["Puzzle", "Simulación"], r: "Extremadamente Positivas", pr: 5.79 },
+            { n: "Buckshot Roulette", p: "Steam", c: ["Indie", "Estrategia", "Terror"], r: "Extremadamente Positivas", pr: 2.99 },
+            { n: "Call of Duty®", p: "Steam", c: ["FPS", "Multiplayer"], r: "Variadas", pr: 0 },
+            { n: "Counter-Strike", p: "Steam", c: ["FPS", "Multiplayer"], r: "Extremadamente Positivas", pr: 5.79 },
+            { n: "Counter-Strike 2", p: "Steam", c: ["FPS", "Multiplayer"], r: "Muy Positivas", pr: 0 },
+            { n: "Counter-Strike: Condition Zero", p: "Steam", c: ["FPS"], r: "Muy Positivas", pr: 5.79 },
+            { n: "Counter-Strike: Condition Zero Deleted Scenes", p: "Steam", c: ["FPS"], r: "Muy Positivas", pr: 0 },
+            { n: "Dead Age", p: "Steam", c: ["RPG", "Estrategia"], r: "Muy Positivas", pr: 7.99 },
+            { n: "Dead Island Definitive Edition", p: "Steam", c: ["Acción", "Supervivencia"], r: "Muy Positivas", pr: 14.99 },
+            { n: "DOOM", p: "Steam", c: ["FPS", "Acción"], r: "Extremadamente Positivas", pr: 19.99 },
+            { n: "Escape Memoirs: Mini Stories", p: "Steam", c: ["Puzzle", "Indie"], r: "Muy Positivas", pr: 0 },
+            { n: "Escape Memoirs: Questionable Side Stories", p: "Steam", c: ["Puzzle", "Indie"], r: "Muy Positivas", pr: 0 },
+            { n: "Escape Room - The Sick Colleague", p: "Steam", c: ["Puzzle", "Indie"], r: "Muy Positivas", pr: 4.99 },
+            { n: "Gang Beasts", p: "Steam", c: ["Multiplayer", "Indie"], r: "Muy Positivas", pr: 10.49 },
             { n: "Geometry Dash", p: "Steam", c: ["Indie", "Acción"], r: "Extremadamente Positivas", pr: 3.99 },
-            { n: "Getting Over It with Bennett Foddy", p: "Steam", c: ["Indie"], r: "Muy Positivas", pr: 7.99 },
-            { n: "Golf It!", p: "Steam", c: ["Deportes", "Co-op"], r: "Muy Positivas", pr: 8.99 },
-            { n: "Golf With Your Friends", p: "Steam", c: ["Deportes", "Co-op"], r: "Muy Positivas", pr: 14.99 },
-            { n: "Governor of Poker 3", p: "Steam", c: ["Estrategia"], r: "Muy Positivas", pr: 0 },
-            { n: "Grand Theft Auto V Enhanced", p: "Steam", c: ["Aventura", "Acción"], r: "Muy Positivas", pr: 29.99 },
-            { n: "Grand Theft Auto V Legacy", p: "Steam", c: ["Aventura", "Acción"], r: "Muy Positivas", pr: 0 },
-            { n: "Hacknet", p: "Steam", c: ["Simulación", "Indie"], r: "Extremadamente Positivas", pr: 9.99 },
-            { n: "Internet Cafe Simulator 2", p: "Steam", c: ["Simulación"], r: "Variadas", pr: 19.99 },
-            { n: "Left 4 Dead 2", p: "Steam", c: ["Acción", "Co-op"], r: "Extremadamente Positivas", pr: 9.99 },
-            { n: "Lethal Company", p: "Steam", c: ["Supervivencia", "Co-op"], r: "Extremadamente Positivas", pr: 9.99 },
+            { n: "Getting Over It with Bennett Foddy", p: "Steam", c: ["Indie", "Puzzle"], r: "Muy Positivas", pr: 4.49 },
+            { n: "Golf It!", p: "Steam", c: ["Deportes", "Multiplayer"], r: "Muy Positivas", pr: 4.99 },
+            { n: "Golf With Your Friends", p: "Steam", c: ["Deportes", "Multiplayer"], r: "Muy Positivas", pr: 7.99 },
+            { n: "Governor of Poker 3", p: "Steam", c: ["Estrategia", "Cartas"], r: "Muy Positivas", pr: 0 },
+            { n: "Grand Theft Auto V Enhanced", p: "Steam", c: ["Acción", "Aventura"], r: "Muy Positivas", pr: 29.99 },
+            { n: "Grand Theft Auto V Legacy", p: "Steam", c: ["Acción", "Aventura"], r: "Muy Positivas", pr: 0 },
+            { n: "Hacknet", p: "Steam", c: ["Simulación", "Indie"], r: "Extremadamente Positivas", pr: 5.79 },
+            { n: "Internet Cafe Simulator 2", p: "Steam", c: ["Simulación"], r: "Variadas", pr: 10.49 },
+            { n: "Left 4 Dead 2", p: "Steam", c: ["FPS", "Multiplayer"], r: "Extremadamente Positivas", pr: 5.79 },
+            { n: "Lethal Company", p: "Steam", c: ["Terror", "Multiplayer"], r: "Extremadamente Positivas", pr: 5.79 },
             { n: "METAL GEAR RISING: REVENGEANCE", p: "Steam", c: ["Acción"], r: "Extremadamente Positivas", pr: 29.99 },
-            { n: "MONOPOLY Poker", p: "Steam", c: ["Estrategia"], r: "Variadas", pr: 0 },
-            { n: "Once Human", p: "Steam", c: ["Supervivencia", "Co-op"], r: "Muy Positivas", pr: 0 },
-            { n: "PAYDAY 2", p: "Steam", c: ["Acción", "Co-op"], r: "Muy Positivas", pr: 9.99 },
-            { n: "Phasmophobia", p: "Steam", c: ["Supervivencia", "Co-op"], r: "Extremadamente Positivas", pr: 19.99 },
-            { n: "PICO PARK:Classic Edition", p: "Steam", c: ["Indie", "Co-op"], r: "Muy Positivas", pr: 0 },
-            { n: "Poker Master - Texas Hold'em Póker...", p: "Steam", c: ["Estrategia"], r: "Variadas", pr: 0 },
-            { n: "Project Zomboid", p: "Steam", c: ["Supervivencia", "RPG"], r: "Extremadamente Positivas", pr: 19.99 },
-            { n: "Raft", p: "Steam", c: ["Supervivencia", "Co-op"], r: "Muy Positivas", pr: 19.99 },
-            { n: "Ranch Simulator", p: "Steam", c: ["Simulación", "Co-op"], r: "Muy Positivas", pr: 24.99 },
-            { n: "Sherlock Holmes Chapter One", p: "Steam", c: ["Aventura"], r: "Muy Positivas", pr: 44.99 },
-            { n: "Sherlock Holmes: Crimes and Punishments", p: "Steam", c: ["Aventura"], r: "Muy Positivas", pr: 29.99 },
-            { n: "Stumble Guys", p: "Steam", c: ["Acción", "Co-op"], r: "Muy Positivas", pr: 0 },
-            { n: "Subnautica", p: "Steam", c: ["Supervivencia", "Aventura"], r: "Extremadamente Positivas", pr: 29.99 },
-            { n: "The Forest", p: "Steam", c: ["Supervivencia", "Co-op"], r: "Extremadamente Positivas", pr: 19.99 },
-            { n: "Thief Simulator", p: "Steam", c: ["Simulación"], r: "Muy Positivas", pr: 19.99 },
+            { n: "MONOPOLY Poker", p: "Steam", c: ["Estrategia", "Cartas"], r: "Variadas", pr: 0 },
+            { n: "Once Human", p: "Steam", c: ["Supervivencia", "Multiplayer"], r: "Muy Positivas", pr: 0 },
+            { n: "PAYDAY 2", p: "Steam", c: ["FPS", "Multiplayer"], r: "Muy Positivas", pr: 5.79 },
+            { n: "Phasmophobia", p: "Steam", c: ["Terror", "Multiplayer"], r: "Extremadamente Positivas", pr: 10.49 },
+            { n: "PICO PARK:Classic Edition", p: "Steam", c: ["Puzzle", "Indie"], r: "Muy Positivas", pr: 0 },
+            { n: "Poker Master - Texas Hold'em Póker...", p: "Steam", c: ["Estrategia", "Cartas"], r: "Variadas", pr: 0 },
+            { n: "Project Zomboid", p: "Steam", c: ["Supervivencia", "RPG"], r: "Extremadamente Positivas", pr: 10.49 },
+            { n: "Raft", p: "Steam", c: ["Supervivencia", "Multiplayer"], r: "Muy Positivas", pr: 10.99 },
+            { n: "Ranch Simulator", p: "Steam", c: ["Simulación", "Multiplayer"], r: "Muy Positivas", pr: 6.73 },
+            { n: "Sherlock Holmes Chapter One", p: "Steam", c: ["Aventura", "Puzzle"], r: "Muy Positivas", pr: 24.99 },
+            { n: "Sherlock Holmes: Crimes and Punishments", p: "Steam", c: ["Aventura", "Puzzle"], r: "Muy Positivas", pr: 14.99 },
+            { n: "Stumble Guys", p: "Steam", c: ["Multiplayer", "Acción"], r: "Muy Positivas", pr: 0 },
+            { n: "Subnautica", p: "Steam", c: ["Supervivencia", "Aventura"], r: "Extremadamente Positivas", pr: 14.99 },
+            { n: "The Forest", p: "Steam", c: ["Supervivencia", "Terror"], r: "Extremadamente Positivas", pr: 10.49 },
+            { n: "Thief Simulator", p: "Steam", c: ["Simulación", "Indie"], r: "Muy Positivas", pr: 11.23 },
             { n: "Tres Reinos: El último señor de la guerra", p: "Steam", c: ["Estrategia"], r: "Mayormente Positivas", pr: 3.99 },
-            { n: "Unravel Two", p: "Steam", c: ["Aventura", "Co-op"], r: "Muy Positivas", pr: 19.99 },
-            { n: "The Witcher: Enhanced Edition", p: "Steam", c: ["RPG"], r: "Muy Positivas", pr: 9.99 },
-            
-            // EPIC GAMES
-            { n: "[REDACTED]", p: "Epic", c: ["Aventura"], r: "Excelente", pr: 24.99 },
+            { n: "Unravel Two", p: "Steam", c: ["Aventura", "Indie"], r: "Muy Positivas", pr: 19.99 },
+            { n: "The Witcher: Enhanced Edition", p: "Steam", c: ["RPG"], r: "Muy Positivas", pr: 5.79 },
+
+            // EPIC GAMES (Precios Store Global)
+            { n: "[REDACTED]", p: "Epic", c: ["Aventura", "Indie"], r: "Excelente", pr: 24.99 },
             { n: "Bloodstained: Ritual of the Night", p: "Epic", c: ["Acción", "RPG"], r: "Excelente", pr: 39.99 },
             { n: "Cassette Beasts", p: "Epic", c: ["RPG", "Indie"], r: "Excelente", pr: 19.99 },
-            { n: "Chivalry 2", p: "Epic", c: ["Acción", "Co-op"], r: "Muy Positivas", pr: 39.99 },
-            { n: "Chivalry 2 - Public Testing", p: "Epic", c: ["Acción", "Co-op"], r: "Muy Positivas", pr: 0 },
+            { n: "Chivalry 2", p: "Epic", c: ["Acción", "Multiplayer"], r: "Muy Positivas", pr: 39.99 },
+            { n: "Chivalry 2 - Public Testing", p: "Epic", c: ["Acción", "Multiplayer"], r: "Muy Positivas", pr: 0 },
             { n: "Costume Quest 2", p: "Epic", c: ["RPG", "Aventura"], r: "Excelente", pr: 14.99 },
-            { n: "Dead Island 2", p: "Epic", c: ["Acción", "RPG"], r: "Excelente", pr: 59.99 },
+            { n: "Dead Island 2", p: "Epic", c: ["Acción", "RPG"], r: "Excelente", pr: 49.99 },
             { n: "Disco Elysium - The Final Cut", p: "Epic", c: ["RPG", "Indie"], r: "Excelente", pr: 39.99 },
             { n: "Dishonored - Definitive Edition", p: "Epic", c: ["Acción", "Aventura"], r: "Excelente", pr: 19.99 },
-            { n: "Eternights", p: "Epic", c: ["Acción", "RPG"], r: "Muy Positivas", pr: 29.99 },
-            { n: "Eximius: Seize the Frontline", p: "Epic", c: ["Estrategia", "Acción"], r: "Variadas", pr: 29.99 },
-            { n: "Fall Guys", p: "Epic", c: ["Co-op", "Deportes"], r: "Muy Positivas", pr: 0 },
-            { n: "Fortnite", p: "Epic", c: ["Acción", "Co-op"], r: "Excelente", pr: 0 },
-            { n: "Golden Light", p: "Epic", c: ["Supervivencia", "Indie"], r: "Muy Positivas", pr: 19.99 },
-            { n: "Happy Game", p: "Epic", c: ["Indie", "Aventura"], r: "Excelente", pr: 12.99 },
+            { n: "Eternights", p: "Epic", c: ["RPG", "Acción"], r: "Muy Positivas", pr: 29.99 },
+            { n: "Eximius: Seize the Frontline", p: "Epic", c: ["Estrategia", "FPS"], r: "Variadas", pr: 29.99 },
+            { n: "Fall Guys", p: "Epic", c: ["Multiplayer", "Deportes"], r: "Muy Positivas", pr: 0 },
+            { n: "Fortnite", p: "Epic", c: ["FPS", "Multiplayer"], r: "Excelente", pr: 0 },
+            { n: "Golden Light", p: "Epic", c: ["Terror", "Indie"], r: "Muy Positivas", pr: 19.99 },
+            { n: "Happy Game", p: "Epic", c: ["Indie", "Terror"], r: "Excelente", pr: 13.13 },
             { n: "Hogwarts Legacy", p: "Epic", c: ["RPG", "Aventura"], r: "Excelente", pr: 59.99 },
             { n: "Horizon Chase Turbo", p: "Epic", c: ["Deportes", "Indie"], r: "Muy Positivas", pr: 19.99 },
             { n: "Kerbal Space Program", p: "Epic", c: ["Simulación", "Indie"], r: "Excelente", pr: 39.99 },
             { n: "Marvel's Guardians of the Galaxy", p: "Epic", c: ["Acción", "Aventura"], r: "Excelente", pr: 59.99 },
-            { n: "Midnight Ghost Hunt", p: "Epic", c: ["Co-op", "Acción"], r: "Muy Positivas", pr: 19.99 },
+            { n: "Midnight Ghost Hunt", p: "Epic", c: ["Multiplayer", "Terror"], r: "Muy Positivas", pr: 19.99 },
             { n: "Nobody Wants to Die", p: "Epic", c: ["Aventura", "Indie"], r: "Excelente", pr: 24.99 },
             { n: "Paradise Killer", p: "Epic", c: ["Aventura", "Indie"], r: "Excelente", pr: 19.99 },
-            { n: "Rocket League®", p: "Epic", c: ["Co-op", "Deportes"], r: "Muy Positivas", pr: 0 },
-            { n: "Roller Champions", p: "Epic", c: ["Deportes", "Co-op"], r: "Variadas", pr: 0 },
+            { n: "Rocket League®", p: "Epic", c: ["Deportes", "Multiplayer"], r: "Muy Positivas", pr: 0 },
+            { n: "Roller Champions", p: "Epic", c: ["Deportes", "Multiplayer"], r: "Variadas", pr: 0 },
             { n: "Sable", p: "Epic", c: ["Aventura", "Indie"], r: "Excelente", pr: 24.99 },
-            { n: "SKALD Against the Black Priory", p: "Epic", c: ["RPG", "Estrategia"], r: "Excelente", pr: 14.99 },
-            { n: "Sorry We're Closed", p: "Epic", c: ["Supervivencia", "Indie"], r: "Muy Positivas", pr: 14.99 },
-            { n: "The Callisto Protocol", p: "Epic", c: ["Supervivencia", "Acción"], r: "Muy Positivas", pr: 59.99 },
-            { n: "Total War: THREE KINGDOMS", p: "Epic", c: ["Estrategia", "Acción"], r: "Excelente", pr: 59.99 },
-            { n: "Trine 2: Complete Story", p: "Epic", c: ["Indie", "Aventura"], r: "Excelente", pr: 19.99 },
-            { n: "Trine 3: The Artifacts of Power", p: "Epic", c: ["Indie", "Aventura"], r: "Muy Positivas", pr: 21.99 },
-            { n: "Trine 4: Definitive Edition", p: "Epic", c: ["Indie", "Aventura"], r: "Excelente", pr: 29.99 },
-            { n: "Trine Enchanted Edition", p: "Epic", c: ["Indie", "Aventura"], r: "Excelente", pr: 14.99 },
-            { n: "VALORANT", p: "Epic", c: ["Acción", "Co-op"], r: "Excelente", pr: 0 },
-            { n: "Viewfinder", p: "Epic", c: ["Indie", "Aventura"], r: "Excelente", pr: 24.99 },
-            { n: "We Were Here Together", p: "Epic", c: ["Indie", "Co-op"], r: "Excelente", pr: 12.99 },
-            { n: "Wildgate", p: "Epic", c: ["Estrategia", "RPG"], r: "Excelente", pr: 29.99 }
+            { n: "SKALD Against the Black Priory", p: "Epic", c: ["RPG", "Indie"], r: "Excelente", pr: 14.99 },
+            { n: "Sorry We're Closed", p: "Epic", c: ["Terror", "Aventura"], r: "Muy Positivas", pr: 14.99 },
+            { n: "The Callisto Protocol", p: "Epic", c: ["Terror", "Acción"], r: "Muy Positivas", pr: 59.99 },
+            { n: "Total War: THREE KINGDOMS", p: "Epic", c: ["Estrategia"], r: "Excelente", pr: 59.99 },
+            { n: "Trine 2: Complete Story", p: "Epic", c: ["Puzzle", "Aventura"], r: "Excelente", pr: 19.99 },
+            { n: "Trine 3: The Artifacts of Power", p: "Epic", c: ["Puzzle", "Aventura"], r: "Muy Positivas", pr: 21.99 },
+            { n: "Trine 4: Definitive Edition", p: "Epic", c: ["Puzzle", "Aventura"], r: "Excelente", pr: 29.99 },
+            { n: "Trine Enchanted Edition", p: "Epic", c: ["Puzzle", "Aventura"], r: "Excelente", pr: 14.99 },
+            { n: "VALORANT", p: "Epic", c: ["FPS", "Multiplayer"], r: "Excelente", pr: 0 },
+            { n: "Viewfinder", p: "Epic", c: ["Puzzle", "Indie"], r: "Excelente", pr: 24.99 },
+            { n: "We Were Here Together", p: "Epic", c: ["Puzzle", "Multiplayer"], r: "Excelente", pr: 12.99 },
+            { n: "Wildgate", p: "Epic", c: ["RPG", "Indie"], r: "Excelente", pr: 19.99 }
         ];
 
         let currentCat = 'all';
