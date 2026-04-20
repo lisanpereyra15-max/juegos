@@ -167,14 +167,18 @@
         <div class="filter-group">
             <button class="filter-btn cat-filter active" onclick="filterCategory('all', this)">Todos los géneros</button>
             <button class="filter-btn cat-filter" onclick="filterCategory('Multiplayer', this)">Multiplayer</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('Co-op', this)">Co-op</button>
             <button class="filter-btn cat-filter" onclick="filterCategory('Supervivencia', this)">Supervivencia</button>
             <button class="filter-btn cat-filter" onclick="filterCategory('Terror', this)">Terror</button>
             <button class="filter-btn cat-filter" onclick="filterCategory('FPS', this)">Acción / FPS</button>
             <button class="filter-btn cat-filter" onclick="filterCategory('Aventura', this)">Aventura</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('Mundo Abierto', this)">Mundo Abierto</button>
             <button class="filter-btn cat-filter" onclick="filterCategory('Puzzle', this)">Puzzle / Ingenio</button>
             <button class="filter-btn cat-filter" onclick="filterCategory('RPG', this)">RPG</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('Deportes', this)">Deportes</button>
             <button class="filter-btn cat-filter" onclick="filterCategory('Simulación', this)">Simulación</button>
             <button class="filter-btn cat-filter" onclick="filterCategory('Estrategia', this)">Estrategia / Cartas</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('Indie', this)">Indie</button>
         </div>
     </aside>
 
@@ -213,7 +217,7 @@
             { n: "Escape Memoirs: Questionable Side Stories", p: "Steam", c: ["Puzzle", "Aventura"], r: "Muy Positivas", pr: 0 },
             { n: "Escape Room - The Sick Colleague", p: "Steam", c: ["Puzzle", "Indie"], r: "Muy Positivas", pr: 4.99 },
             { n: "Gang Beasts", p: "Steam", c: ["Multiplayer"], r: "Muy Positivas", pr: 19.99 },
-            { n: "Geometry Dash", p: "Steam", c: ["Plataformas"], r: "Extremadamente Positivas", pr: 4.99 },
+            { n: "Geometry Dash", p: "Steam", c: ["Plataformas"], r: "Extremadamente Positivas", pr: 3.99 },
             { n: "Getting Over It", p: "Steam", c: ["Difícil"], r: "Muy Positivas", pr: 7.99 },
             { n: "Golf It!", p: "Steam", c: ["Deportes", "Multiplayer"], r: "Muy Positivas", pr: 8.99 },
             { n: "Golf With Your Friends", p: "Steam", c: ["Deportes", "Multiplayer"], r: "Muy Positivas", pr: 14.99 },
@@ -223,7 +227,7 @@
             { n: "Internet Cafe Simulator 2", p: "Steam", c: ["Simulación"], r: "Variadas", pr: 19.99 },
             { n: "Left 4 Dead 2", p: "Steam", c: ["FPS", "Zombies", "Multiplayer"], r: "Extremadamente Positivas", pr: 9.99 },
             { n: "Lethal Company", p: "Steam", c: ["Terror", "Co-op"], r: "Extremadamente Positivas", pr: 9.99 },
-            { n: "Metal Gear Rising", p: "Steam", c: ["Acción"], r: "Extremadamente Positivas", pr: 29.99 },
+            { n: "Metal Gear Rising®", p: "Steam", c: ["Acción"], r: "Extremadamente Positivas", pr: 29.99 },
             { n: "MONOPOLY Poker", p: "Steam", c: ["Estrategia", "Cartas"], r: "Variadas", pr: 0 },
             { n: "Once Human", p: "Steam", c: ["Supervivencia"], r: "Muy Positivas", pr: 0 },
             { n: "PAYDAY 2", p: "Steam", c: ["Acción", "Multiplayer"], r: "Muy Positivas", pr: 9.99 },
@@ -242,7 +246,7 @@
             { n: "Unravel Two", p: "Steam", c: ["Aventura", "Puzzle"], r: "Muy Positivas", pr: 19.99 },
             { n: "The Witcher", p: "Steam", c: ["RPG"], r: "Muy Positivas", pr: 9.99 },
             
-            // EPIC
+            // EPIC GAMES (Integración completa de las nuevas imágenes)
             { n: "Batman: Arkham Asylum", p: "Epic", c: ["Acción", "Aventura"], r: "Excelente", pr: 19.99 },
             { n: "Batman: Arkham City", p: "Epic", c: ["Acción", "Mundo Abierto"], r: "Excelente", pr: 19.99 },
             { n: "Batman: Arkham Knight", p: "Epic", c: ["Acción", "Aventura"], r: "Excelente", pr: 19.99 },
@@ -251,13 +255,50 @@
             { n: "BioShock Infinite", p: "Epic", c: ["FPS"], r: "Excelente", pr: 29.99 },
             { n: "Borderlands 2", p: "Epic", c: ["FPS", "RPG"], r: "Excelente", pr: 19.99 },
             { n: "Death Stranding", p: "Epic", c: ["Aventura"], r: "Excelente", pr: 29.99 },
-            { n: "Fall Guys", p: "Epic", c: ["Multiplayer"], r: "Muy Positivas", pr: 0 },
+            { n: "Fall Guys", p: "Epic", c: ["Multiplayer", "Plataformas"], r: "Muy Positivas", pr: 0 },
             { n: "Ghostrunner", p: "Epic", c: ["Acción"], r: "Excelente", pr: 29.99 },
-            { n: "Rocket League", p: "Epic", c: ["Multiplayer"], r: "Muy Positivas", pr: 0 },
+            { n: "Rocket League®", p: "Epic", c: ["Multiplayer", "Deportes"], r: "Muy Positivas", pr: 0 },
             { n: "Tomb Raider: GOTY", p: "Epic", c: ["Aventura", "Acción"], r: "Excelente", pr: 19.99 },
             { n: "Rise of the Tomb Raider", p: "Epic", c: ["Aventura", "Acción"], r: "Excelente", pr: 29.99 },
             { n: "Shadow of the Tomb Raider", p: "Epic", c: ["Aventura", "Acción"], r: "Excelente", pr: 39.99 },
-            { n: "Wolfenstein: The New Order", p: "Epic", c: ["FPS", "Acción"], r: "Excelente", pr: 19.99 }
+            { n: "Wolfenstein: The New Order", p: "Epic", c: ["FPS", "Acción"], r: "Excelente", pr: 19.99 },
+            
+            // NUEVOS JUEGOS DE EPIC
+            { n: "[REDACTED]", p: "Epic", c: ["Aventura", "Misterio"], r: "???", pr: 0 },
+            { n: "Bloodstained: Ritual of the Night", p: "Epic", c: ["Acción", "RPG", "Plataformas"], r: "Excelente", pr: 29.99 },
+            { n: "Cassette Beasts", p: "Epic", c: ["RPG", "Aventura", "Indie"], r: "Excelente", pr: 19.99 },
+            { n: "Chivalry 2", p: "Epic", c: ["Acción", "Multiplayer", "Lucha"], r: "Muy Positivas", pr: 39.99 },
+            { n: "Chivalry 2 - Public Testing", p: "Epic", c: ["Acción", "Multiplayer"], r: "Muy Positivas", pr: 0 },
+            { n: "Costume Quest 2", p: "Epic", c: ["RPG", "Aventura", "Puzzle"], r: "Excelente", pr: 14.99 },
+            { n: "Dead Island 2", p: "Epic", c: ["Acción", "Zombies", "RPG"], r: "Excelente", pr: 49.99 },
+            { n: "Disco Elysium - The Final Cut", p: "Epic", c: ["RPG", "Aventura", "Indie"], r: "Excelente", pr: 39.99 },
+            { n: "Dishonored - Definitive Edition", p: "Epic", c: ["Acción", "Aventura", "Sigilo"], r: "Excelente", pr: 19.99 },
+            { n: "Eternights", p: "Epic", c: ["Acción", "RPG", "Simulación"], r: "Muy Positivas", pr: 29.99 },
+            { n: "Eximius: Seize the Frontline", p: "Epic", c: ["Estrategia", "FPS", "Acción"], r: "Variadas", pr: 29.99 },
+            { n: "Fortnite", p: "Epic", c: ["FPS", "Multiplayer", "Supervivencia"], r: "Excelente", pr: 0 },
+            { n: "Golden Light", p: "Epic", c: ["Terror", "FPS", "Indie", "Supervivencia"], r: "Muy Positivas", pr: 19.99 },
+            { n: "Happy Game", p: "Epic", c: ["Puzzle", "Terror", "Indie", "Aventura"], r: "Excelente", pr: 12.99 },
+            { n: "Hogwarts Legacy", p: "Epic", c: ["RPG", "Mundo Abierto", "Aventura"], r: "Excelente", pr: 59.99 },
+            { n: "Horizon Chase Turbo", p: "Epic", c: ["Deportes", "Indie"], r: "Muy Positivas", pr: 19.99 },
+            { n: "Kerbal Space Program", p: "Epic", c: ["Simulación", "Puzzle", "Indie"], r: "Excelente", pr: 39.99 },
+            { n: "Marvel's Guardians of the Galaxy", p: "Epic", c: ["Acción", "Aventura", "Sci-Fi"], r: "Excelente", pr: 39.99 },
+            { n: "Midnight Ghost Hunt", p: "Epic", c: ["Multiplayer", "Acción", "Terror"], r: "Muy Positivas", pr: 19.99 },
+            { n: "Nobody Wants to Die", p: "Epic", c: ["Aventura", "Misterio", "Indie"], r: "Excelente", pr: 24.99 },
+            { n: "Paradise Killer", p: "Epic", c: ["Aventura", "Misterio", "Indie"], r: "Excelente", pr: 19.99 },
+            { n: "Roller Champions", p: "Epic", c: ["Deportes", "Multiplayer"], r: "Variadas", pr: 0 },
+            { n: "Sable", p: "Epic", c: ["Aventura", "Exploración", "Indie"], r: "Excelente", pr: 24.99 },
+            { n: "SKALD Against the Black Priory", p: "Epic", c: ["RPG", "Estrategia", "Indie"], r: "Excelente", pr: 19.99 },
+            { n: "Sorry We're Closed", p: "Epic", c: ["Terror", "Indie", "Aventura"], r: "Muy Positivas", pr: 14.99 },
+            { n: "The Callisto Protocol", p: "Epic", c: ["Terror", "Acción", "Sci-Fi"], r: "Muy Positivas", pr: 59.99 },
+            { n: "Total War: THREE KINGDOMS", p: "Epic", c: ["Estrategia", "RPG", "Acción"], r: "Excelente", pr: 59.99 },
+            { n: "Trine 2: Complete Story", p: "Epic", c: ["Puzzle", "Aventura", "Plataformas", "Co-op"], r: "Excelente", pr: 19.99 },
+            { n: "Trine 3: The Artifacts of Power", p: "Epic", c: ["Puzzle", "Aventura", "Plataformas", "Co-op"], r: "Muy Positivas", pr: 19.99 },
+            { n: "Trine 4: Definitive Edition", p: "Epic", c: ["Puzzle", "Aventura", "Plataformas", "Co-op"], r: "Excelente", pr: 29.99 },
+            { n: "Trine Enchanted Edition", p: "Epic", c: ["Puzzle", "Aventura", "Plataformas", "Co-op"], r: "Excelente", pr: 14.99 },
+            { n: "VALORANT", p: "Epic", c: ["FPS", "Multiplayer"], r: "Excelente", pr: 0 },
+            { n: "Viewfinder", p: "Epic", c: ["Puzzle", "Indie", "Aventura"], r: "Excelente", pr: 24.99 },
+            { n: "We Were Here Together", p: "Epic", c: ["Puzzle", "Aventura", "Indie", "Co-op"], r: "Excelente", pr: 12.99 },
+            { n: "Wildgate", p: "Epic", c: ["Estrategia", "RPG", "Indie"], r: "Excelente", pr: 19.99 }
         ];
 
         let currentCat = 'all';
