@@ -28,8 +28,40 @@
             display: flex;
             height: 100vh;
             overflow: hidden;
+            position: relative;
         }
 
+        /* Botón Menú Móvil */
+        .mobile-toggle {
+            display: none;
+            background: var(--bg-item);
+            border: 1px solid #2d2d35;
+            color: var(--text-p);
+            font-size: 1.5rem;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        /* Overlay para cerrar el menú en móvil */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            backdrop-filter: blur(2px);
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Sidebar */
         aside {
             width: 280px;
             background-color: var(--bg-side);
@@ -38,6 +70,10 @@
             flex-direction: column;
             padding: 25px;
             flex-shrink: 0;
+            z-index: 999;
+            transition: transform 0.3s ease-in-out;
+            height: 100%;
+            overflow-y: auto;
         }
 
         .logo {
@@ -62,7 +98,6 @@
             display: flex;
             flex-direction: column;
             gap: 5px;
-            overflow-y: auto;
         }
 
         .filter-btn {
@@ -90,10 +125,13 @@
             box-shadow: 0 4px 15px var(--accent-glow);
         }
 
+        /* Main Content */
         main {
             flex-grow: 1;
             padding: 40px;
             overflow-y: auto;
+            display: flex;
+            flex-direction: column;
         }
 
         header {
@@ -103,10 +141,17 @@
             margin-bottom: 40px;
             border-bottom: 1px solid #2d2d35;
             padding-bottom: 20px;
+            gap: 20px;
         }
 
-        .header-left h1 { margin: 0; font-size: 2.2rem; }
-        .header-left p { margin: 5px 0 0 0; color: var(--text-s); }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-titles h1 { margin: 0; font-size: 2.2rem; }
+        .header-titles p { margin: 5px 0 0 0; color: var(--text-s); }
 
         .stats-box {
             background: var(--bg-item);
@@ -114,12 +159,14 @@
             border-radius: 12px;
             border: 1px solid var(--accent);
             text-align: right;
+            flex-shrink: 0;
         }
 
         .stats-box label { display: block; font-size: 0.7rem; color: var(--text-s); text-transform: uppercase; }
         .stats-box span { font-size: 1.5rem; font-weight: 800; color: var(--accent-light); }
 
-        .game-list { display: flex; flex-direction: column; gap: 8px; }
+        /* Games List */
+        .game-list { display: flex; flex-direction: column; gap: 8px; padding-bottom: 40px; }
 
         .game-row {
             background-color: var(--bg-item);
@@ -137,7 +184,7 @@
         }
 
         .name-col { font-weight: 600; display: flex; align-items: center; gap: 12px; }
-        .category-tag { font-size: 0.75rem; color: var(--accent-light); background: rgba(139, 92, 246, 0.1); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(139, 92, 246, 0.2); }
+        .category-tag { font-size: 0.75rem; color: var(--accent-light); background: rgba(139, 92, 246, 0.1); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(139, 92, 246, 0.2); display: inline-block; margin: 2px;}
         .platform-tag { font-size: 0.7rem; padding: 3px 8px; border-radius: 4px; font-weight: 700; text-transform: uppercase; }
         .tag-steam { background: #1b2838; color: var(--steam-blue); }
         .tag-epic { background: #2a2a2a; color: white; }
@@ -146,42 +193,96 @@
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+        /* Media Queries para Móviles */
+        @media (max-width: 900px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            aside {
+                position: fixed;
+                left: 0;
+                transform: translateX(-100%); /* Oculto por defecto */
+                height: 100dvh;
+            }
+
+            aside.open {
+                transform: translateX(0); /* Visible cuando tiene la clase open */
+            }
+
+            main {
+                padding: 20px;
+            }
+
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .stats-box {
+                width: 100%;
+                box-sizing: border-box;
+                text-align: left;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .game-row {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .price-col {
+                text-align: left;
+                font-size: 1.2rem;
+                padding-top: 10px;
+                border-top: 1px solid #2d2d35;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <aside>
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <aside id="sidebar">
         <div class="logo"><span>👾</span> GameVault</div>
         
         <h3>Plataforma</h3>
         <div class="filter-group">
-            <button class="filter-btn plat-filter active" onclick="filterPlatform('all', this)">Todas</button>
-            <button class="filter-btn plat-filter" onclick="filterPlatform('Steam', this)">Steam</button>
-            <button class="filter-btn plat-filter" onclick="filterPlatform('Epic', this)">Epic Games</button>
+            <button class="filter-btn plat-filter active" onclick="filterPlatform('all', this); toggleMenuIfMobile();">Todas</button>
+            <button class="filter-btn plat-filter" onclick="filterPlatform('Steam', this); toggleMenuIfMobile();">Steam</button>
+            <button class="filter-btn plat-filter" onclick="filterPlatform('Epic', this); toggleMenuIfMobile();">Epic Games</button>
         </div>
 
         <h3>Categorías</h3>
         <div class="filter-group">
-            <button class="filter-btn cat-filter active" onclick="filterCategory('all', this)">Todos los géneros</button>
-            <button class="filter-btn cat-filter" onclick="filterCategory('Multiplayer', this)">Multiplayer</button>
-            <button class="filter-btn cat-filter" onclick="filterCategory('Supervivencia', this)">Supervivencia</button>
-            <button class="filter-btn cat-filter" onclick="filterCategory('Terror', this)">Terror</button>
-            <button class="filter-btn cat-filter" onclick="filterCategory('FPS', this)">Acción / FPS</button>
-            <button class="filter-btn cat-filter" onclick="filterCategory('Aventura', this)">Aventura</button>
-            <button class="filter-btn cat-filter" onclick="filterCategory('Puzzle', this)">Puzzle / Ingenio</button>
-            <button class="filter-btn cat-filter" onclick="filterCategory('RPG', this)">RPG</button>
-            <button class="filter-btn cat-filter" onclick="filterCategory('Simulación', this)">Simulación</button>
-            <button class="filter-btn cat-filter" onclick="filterCategory('Estrategia', this)">Estrategia / Cartas</button>
-            <button class="filter-btn cat-filter" onclick="filterCategory('Deportes', this)">Deportes</button>
-            <button class="filter-btn cat-filter" onclick="filterCategory('Indie', this)">Indie</button>
+            <button class="filter-btn cat-filter active" onclick="filterCategory('all', this); toggleMenuIfMobile();">Todos los géneros</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('Multiplayer', this); toggleMenuIfMobile();">Multiplayer</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('Supervivencia', this); toggleMenuIfMobile();">Supervivencia</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('Terror', this); toggleMenuIfMobile();">Terror</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('FPS', this); toggleMenuIfMobile();">Acción / FPS</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('Aventura', this); toggleMenuIfMobile();">Aventura</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('Puzzle', this); toggleMenuIfMobile();">Puzzle / Ingenio</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('RPG', this); toggleMenuIfMobile();">RPG</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('Simulación', this); toggleMenuIfMobile();">Simulación</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('Estrategia', this); toggleMenuIfMobile();">Estrategia / Cartas</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('Deportes', this); toggleMenuIfMobile();">Deportes</button>
+            <button class="filter-btn cat-filter" onclick="filterCategory('Indie', this); toggleMenuIfMobile();">Indie</button>
         </div>
     </aside>
 
     <main>
         <header>
             <div class="header-left">
-                <h1>Mi Biblioteca</h1>
-                <p id="counter">Cargando colección...</p>
+                <button class="mobile-toggle" onclick="toggleMenu()">☰</button>
+                <div class="header-titles">
+                    <h1>Mi Biblioteca</h1>
+                    <p id="counter">Cargando colección...</p>
+                </div>
             </div>
             <div class="stats-box">
                 <label>Valor de esta selección</label>
@@ -194,7 +295,7 @@
 
     <script>
         const games = [
-            // STEAM (Región LATAM-USD)
+            // STEAM 
             { n: "A Way Out", p: "Steam", c: ["Aventura", "Multiplayer"], r: "Muy Positivas", pr: 29.99 },
             { n: "ARK: Survival Evolved", p: "Steam", c: ["Supervivencia", "Multiplayer"], r: "Muy Positivas", pr: 14.99 },
             { n: "ARK: Survival Of The Fittest", p: "Steam", c: ["Multiplayer", "FPS"], r: "Positivas", pr: 0 },
@@ -246,7 +347,7 @@
             { n: "Unravel Two", p: "Steam", c: ["Aventura", "Indie"], r: "Muy Positivas", pr: 19.99 },
             { n: "The Witcher: Enhanced Edition", p: "Steam", c: ["RPG"], r: "Muy Positivas", pr: 7.49 },
 
-            // EPIC GAMES (Precios Store Global)
+            // EPIC GAMES
             { n: "[REDACTED]", p: "Epic", c: ["Aventura", "Indie"], r: "Excelente", pr: 24.99 },
             { n: "Bloodstained: Ritual of the Night", p: "Epic", c: ["Acción", "RPG"], r: "Excelente", pr: 24.99 },
             { n: "Cassette Beasts", p: "Epic", c: ["RPG", "Indie"], r: "Excelente", pr: 8.99 },
@@ -289,6 +390,23 @@
         let currentCat = 'all';
         let currentPlat = 'all';
 
+        // Lógica de UI para móvil
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+
+        function toggleMenu() {
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        function toggleMenuIfMobile() {
+            if (window.innerWidth <= 900) {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('active');
+            }
+        }
+
+        // Lógica de filtrado
         function updateList() {
             const container = document.getElementById('list');
             const totalDisplay = document.getElementById('total-price');
@@ -312,7 +430,7 @@
                         <span class="platform-tag tag-${g.p.toLowerCase()}">${g.p}</span>
                         ${g.n}
                     </div>
-                    <div>${g.c.map(cat => `<span class="category-tag">${cat}</span>`).join(' ')}</div>
+                    <div>${g.c.map(cat => `<span class="category-tag">${cat}</span>`).join('')}</div>
                     <div style="color:var(--text-s); font-size:0.85rem">★ ${g.r}</div>
                     <div class="price-col">${g.pr === 0 ? 'GRATIS' : 'USD ' + g.pr.toFixed(2)}</div>
                 `;
